@@ -28,4 +28,5 @@ ENV PORT=8000
 EXPOSE 8000
 
 # ---- Start server ----
-CMD ["python", "main.py"]
+CMD exec python main.py
+
