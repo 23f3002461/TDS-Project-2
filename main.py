@@ -284,8 +284,14 @@ def solve_quiz_url(start_url, email, secret):
 
             # Render page
             try:
-                page.goto(url, wait_until="domcontentloaded", timeout=30000)
-                page.wait_for_timeout(500)
+                page.goto(url, wait_until="networkidle", timeout=30000)
+
+                # Wait specifically for the decoded text to appear
+                try:
+                    page.wait_for_selector("#quiz-content", timeout=5000)
+                except:
+                    pass
+
                 html = page.content()
             except:
                 q["solved"] = True
